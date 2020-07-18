@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  background: url(imgs/backgroundImage.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container {
+  border: thick solid red;
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  height: 50%;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+aside {
+  border: thick solid black;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 30%;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+aside button {
+  height: 50px;
+}
+
+main {
+  border: thick solid blue;
+  flex-basis: 70%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#name {
+  border: thick solid black;
+}
+
+#money {
+  border: thick solid black;
+}
