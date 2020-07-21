@@ -1,7 +1,7 @@
 const main = document.querySelector("#main");
 const addUser = document.querySelector("#add-user");
 const double = document.querySelector("#double");
-const showMillionaires = document.querySelector("#show-millionares");
+const showMillionaires = document.querySelector("#show-millionaires");
 const sort = document.querySelector("#sort");
 const calculateWealth = document.querySelector("#calculate-wealth");
 const name = document.querySelector("#name");
@@ -38,8 +38,8 @@ function updateDOM(providedData = arrData) {
     const elementMoney = document.createElement("div");
     element.classList.add("money");
     elementMoney.classList.add("person");
-    element.innerHTML = `<strong>${item.name}</strong>}`;
-    elementMoney.innerHTML = `<strong>${formatMoney(item.money)}</strong>}`;
+    element.innerHTML = `<strong>${item.name}</strong>`;
+    elementMoney.innerHTML = `<strong>${formatMoney(item.money)}</strong>`;
     name.appendChild(element);
     money.appendChild(elementMoney);
   });
@@ -52,16 +52,61 @@ function formatMoney(value) {
 getRandomUser();
 getRandomUser();
 
-//event listeners
+//add user button
 
 addUser.addEventListener("click", getRandomUser);
 
+//double money button (MAP)
 double.addEventListener("click", doubleMoney);
 
 function doubleMoney() {
-  arrData.forEach((item) => {
-    item.money = item.money * 2;
+  arrData = arrData.map((x) => {
+    return { ...x, money: x.money * 2 };
   });
-  //arrData[0].money = arrData[0].money * 2;
+
   updateDOM();
+}
+
+// function doubleMoney() {
+//   arrData.forEach((item) => {
+//     item.money = item.money * 2;
+//   });
+//   updateDOM();
+// }
+
+//sort users by richest button (SORT)
+sort.addEventListener("click", sortByRichest);
+
+function sortByRichest() {
+  arrData.sort((a, b) => b.money - a.money);
+  updateDOM();
+}
+
+//show only millionaires (FILTER)
+showMillionaires.addEventListener("click", onlyShowMillionares);
+
+function onlyShowMillionares() {
+  arrData = arrData.filter((item) => item.money >= 1000000);
+  updateDOM();
+}
+
+//calculate entire wealth (REDUCE)
+calculateWealth.addEventListener("click", calculateEntireWealth);
+
+let totalWealthElementText = document.createElement("div");
+let totalWealthElementMoney = document.createElement("div");
+
+function calculateEntireWealth() {
+  totalWealthValue = arrData.reduce(
+    (accum, current) => accum + current.money,
+    0
+  );
+
+  totalWealthElementText.innerHTML = "<h3>Total Wealth</h3>";
+  totalWealthElementMoney.innerHTML = `<h3>${formatMoney(
+    totalWealthValue
+  )}</h3>`;
+
+  name.appendChild(totalWealthElementText);
+  money.appendChild(totalWealthElementMoney);
 }
