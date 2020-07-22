@@ -1,3 +1,4 @@
+//grabbing the elements
 const main = document.querySelector("#main");
 const addUser = document.querySelector("#add-user");
 const double = document.querySelector("#double");
@@ -7,6 +8,7 @@ const calculateWealth = document.querySelector("#calculate-wealth");
 const name = document.querySelector("#name");
 const money = document.querySelector("#money");
 
+//primary array that stores all data
 let arrData = [];
 
 //fetch random user and add money
@@ -28,18 +30,18 @@ async function getRandomUser() {
   updateDOM();
 }
 
-//Update DOM
+//Update DOM function
 function updateDOM(providedData = arrData) {
   //clear main div
-  name.innerHTML = "Name";
-  money.innerHTML = "Money";
+  name.innerHTML = "<strong>Name</strong>";
+  money.innerHTML = "<strong>Money</strong>";
   providedData.forEach((item) => {
     const element = document.createElement("div");
     const elementMoney = document.createElement("div");
     element.classList.add("money");
     elementMoney.classList.add("person");
-    element.innerHTML = `<strong>${item.name}</strong>`;
-    elementMoney.innerHTML = `<strong>${formatMoney(item.money)}</strong>`;
+    element.innerHTML = `<div>${item.name}</div>`;
+    elementMoney.innerHTML = `<div>${formatMoney(item.money)}</div>`;
     name.appendChild(element);
     money.appendChild(elementMoney);
   });
@@ -53,7 +55,6 @@ getRandomUser();
 getRandomUser();
 
 //add user button
-
 addUser.addEventListener("click", getRandomUser);
 
 //double money button (MAP)
@@ -67,6 +68,7 @@ function doubleMoney() {
   updateDOM();
 }
 
+//additional option to solve above problem
 // function doubleMoney() {
 //   arrData.forEach((item) => {
 //     item.money = item.money * 2;
